@@ -1,0 +1,20 @@
+class Solution(object):
+    def maximumUniqueSubarray(self, nums):
+        res = 0
+        left = 0
+        right = 0
+        window_sum = 0
+        window_set = set()
+        
+        while right < len(nums):
+            if nums[right] not in window_set:
+                window_set.add(nums[right])
+                window_sum += nums[right]
+                res = max(res, window_sum)
+                right += 1
+            else:
+                window_set.remove(nums[left])
+                window_sum -= nums[left]
+                left += 1
+                
+        return res
